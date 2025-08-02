@@ -15,25 +15,30 @@ import { errorHandler, notFoundHandler } from '@/middleware/errorHandler';
 const app: Application = express();
 
 // Security middleware
-app.use(helmet({
-  contentSecurityPolicy: {
-    useDefaults: true,
-    directives: {
-      "script-src": ["'self'", "'unsafe-inline'"],
-      "style-src": ["'self'", "'unsafe-inline'"],
+app.use(
+  helmet({
+    contentSecurityPolicy: {
+      useDefaults: true,
+      directives: {
+        'script-src': ["'self'", "'unsafe-inline'"],
+        'style-src': ["'self'", "'unsafe-inline'"],
+      },
     },
-  },
-}));
+  })
+);
 
 // CORS configuration
-app.use(cors({
-  origin: process.env.NODE_ENV === 'production' 
-    ? ['https://yourdomain.com'] // Replace with your actual domain
-    : ['http://localhost:3000', 'http://localhost:3001'],
-  credentials: true,
-  methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization'],
-}));
+app.use(
+  cors({
+    origin:
+      process.env.NODE_ENV === 'production'
+        ? ['https://yourdomain.com'] // Replace with your actual domain
+        : ['http://localhost:3000', 'http://localhost:3001'],
+    credentials: true,
+    methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
+  })
+);
 
 // Compression middleware
 app.use(compression());
@@ -44,13 +49,15 @@ app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 
 // Logging middleware
 if (config.NODE_ENV !== 'test') {
-  app.use(morgan('combined', {
-    stream: {
-      write: (message: string) => {
-        logger.info(message.trim());
+  app.use(
+    morgan('combined', {
+      stream: {
+        write: (message: string) => {
+          logger.info(message.trim());
+        },
       },
-    },
-  }));
+    })
+  );
 }
 
 // Rate limiting
@@ -92,10 +99,10 @@ if (config.ENABLE_SWAGGER && config.NODE_ENV !== 'production') {
       ],
     },
     apis: [
-      './src/routes/*.ts', 
+      './src/routes/*.ts',
       './src/controllers/*.ts',
       './dist/routes/*.js',
-      './dist/controllers/*.js'
+      './dist/controllers/*.js',
     ], // Path to the API files
   };
 

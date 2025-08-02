@@ -11,8 +11,8 @@ export const validate = (schema: Joi.ObjectSchema) => {
 
     if (error) {
       const details: Record<string, string[]> = {};
-      
-      error.details.forEach((detail) => {
+
+      error.details.forEach(detail => {
         const field = detail.path.join('.');
         if (!details[field]) {
           details[field] = [];
@@ -47,8 +47,8 @@ export const validateQuery = (schema: Joi.ObjectSchema) => {
 
     if (error) {
       const details: Record<string, string[]> = {};
-      
-      error.details.forEach((detail) => {
+
+      error.details.forEach(detail => {
         const field = detail.path.join('.');
         if (!details[field]) {
           details[field] = [];
@@ -87,10 +87,10 @@ export const validateParams = (schema: Joi.ObjectSchema) => {
 
     if (error) {
       const details: Record<string, string[]> = {};
-      
-      error.details.forEach((detail) => {
+
+      error.details.forEach(detail => {
         const field = detail.path.join('.');
-        if (!details[field]) { 
+        if (!details[field]) {
           details[field] = [];
         }
         details[field].push(detail.message);

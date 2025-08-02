@@ -18,7 +18,7 @@ export class TenantController {
 
   createTenant = asyncHandler(async (req: Request, res: Response): Promise<void> => {
     const tenantData: CreateTenantRequest = req.body;
-    
+
     const tenant = await this.tenantService.createTenant(tenantData);
 
     const response: ApiResponse = {
@@ -32,7 +32,7 @@ export class TenantController {
 
   getTenantById = asyncHandler(async (req: Request, res: Response): Promise<void> => {
     const id = parseInt(req.params.id!, 10);
-    
+
     const tenant = await this.tenantService.getTenantById(id);
 
     const response: ApiResponse = {
@@ -87,7 +87,7 @@ export class TenantController {
   updateTenant = asyncHandler(async (req: Request, res: Response): Promise<void> => {
     const id = parseInt(req.params.id!, 10);
     const tenantData: UpdateTenantRequest = req.body;
-    
+
     const tenant = await this.tenantService.updateTenant(id, tenantData);
 
     const response: ApiResponse = {
@@ -102,7 +102,7 @@ export class TenantController {
   updateTenantStatus = asyncHandler(async (req: Request, res: Response): Promise<void> => {
     const id = parseInt(req.params.id!, 10);
     const { is_active }: UpdateTenantStatusRequest = req.body;
-    
+
     await this.tenantService.updateTenantStatus(id, is_active);
 
     const response: ApiResponse = {
@@ -116,7 +116,7 @@ export class TenantController {
 
   deleteTenant = asyncHandler(async (req: Request, res: Response): Promise<void> => {
     const id = parseInt(req.params.id!, 10);
-    
+
     await this.tenantService.deleteTenant(id);
 
     const response: ApiResponse = {

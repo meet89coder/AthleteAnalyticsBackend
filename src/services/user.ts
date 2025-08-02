@@ -89,7 +89,7 @@ export class UserService {
     requestingUserRole: UserRole
   ): Promise<void> {
     const userWithPassword = await this.userModel.findById(id);
-    
+
     if (!userWithPassword) {
       throw new AppError('User not found', 404, 'USER_NOT_FOUND');
     }

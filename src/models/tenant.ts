@@ -1,10 +1,6 @@
 import { Prisma, Tenant } from '@/generated/prisma';
 import { prisma } from '@/config/prisma';
-import {
-  CreateTenantRequest,
-  UpdateTenantRequest,
-  TenantQueryParams,
-} from '@/types/tenant';
+import { CreateTenantRequest, UpdateTenantRequest, TenantQueryParams } from '@/types/tenant';
 import { PaginatedResponse } from '@/types/api';
 
 export class TenantModel {
@@ -101,7 +97,10 @@ export class TenantModel {
     }
   }
 
-  async findAll(params: TenantQueryParams, includeInactive = false): Promise<PaginatedResponse<Tenant>> {
+  async findAll(
+    params: TenantQueryParams,
+    includeInactive = false
+  ): Promise<PaginatedResponse<Tenant>> {
     const {
       page = 1,
       limit = 20,
@@ -151,12 +150,12 @@ export class TenantModel {
 
     // Build orderBy
     const orderBy: Prisma.TenantOrderByWithRelationInput = {};
-    
+
     // Map API field names to Prisma field names
     const fieldMapping: Record<string, string> = {
-      'is_active': 'isActive',
-      'created_at': 'createdAt',
-      'updated_at': 'updatedAt',
+      is_active: 'isActive',
+      created_at: 'createdAt',
+      updated_at: 'updatedAt',
     };
 
     const prismaField = fieldMapping[sort_by] || sort_by;
@@ -190,7 +189,7 @@ export class TenantModel {
 
   async nameExists(name: string, excludeId?: number): Promise<boolean> {
     const where: Prisma.TenantWhereInput = { name };
-    
+
     if (excludeId) {
       where.id = { not: excludeId };
     }

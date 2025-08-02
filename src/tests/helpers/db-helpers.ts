@@ -35,7 +35,8 @@ export class DatabaseHelper {
       role: 'athlete',
       firstName: 'Test',
       lastName: 'User',
-      tenantUniqueId: userData.tenantUniqueId || `test_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`,
+      tenantUniqueId:
+        userData.tenantUniqueId || `test_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`,
       ...userData,
     };
 
@@ -124,7 +125,7 @@ export class DatabaseHelper {
   async resetDatabase(): Promise<void> {
     // Clear all data and reset to initial state
     await this.clearAllTables();
-    
+
     // Ensure admin user exists
     const adminExists = await this.getUserByEmail('admin@athleteanalytics.com');
     if (!adminExists) {

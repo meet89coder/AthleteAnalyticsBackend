@@ -158,12 +158,7 @@ const authController = new AuthController();
  *       429:
  *         description: Rate limit exceeded
  */
-router.post(
-  '/login',
-  authRateLimit,
-  validate(loginSchema),
-  authController.login
-);
+router.post('/login', authRateLimit, validate(loginSchema), authController.login);
 
 /**
  * @swagger
@@ -193,12 +188,7 @@ router.post(
  *       429:
  *         description: Rate limit exceeded
  */
-router.post(
-  '/logout',
-  authRateLimit,
-  authenticate,
-  authController.logout
-);
+router.post('/logout', authRateLimit, authenticate, authController.logout);
 
 /**
  * @swagger
@@ -228,10 +218,6 @@ router.post(
  *       401:
  *         description: Unauthorized
  */
-router.get(
-  '/me',
-  authenticate,
-  authController.getCurrentUser
-);
+router.get('/me', authenticate, authController.getCurrentUser);
 
 export default router;

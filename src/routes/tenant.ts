@@ -371,12 +371,7 @@ router.delete(
  *       401:
  *         description: Unauthorized
  */
-router.get(
-  '/',
-  authenticate,
-  validateQuery(tenantQuerySchema),
-  tenantController.getAllTenants
-);
+router.get('/', authenticate, validateQuery(tenantQuerySchema), tenantController.getAllTenants);
 
 /**
  * @swagger

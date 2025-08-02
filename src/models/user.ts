@@ -1,11 +1,6 @@
 import { Prisma, User } from '@/generated/prisma';
 import { prisma } from '@/config/prisma';
-import {
-  CreateUserRequest,
-  UpdateUserRequest,
-  UserQueryParams,
-  UserRole,
-} from '@/types/user';
+import { CreateUserRequest, UpdateUserRequest, UserQueryParams, UserRole } from '@/types/user';
 import { PaginatedResponse } from '@/types/api';
 
 export class UserModel {
@@ -29,18 +24,21 @@ export class UserModel {
 
   async create(userData: CreateUserRequest & { password_hash: string }): Promise<User> {
     const { password_hash, ...restData } = userData;
-    
+
     // Check if tenant_unique_id already exists
     const existingUser = await this.findByTenantUniqueId(restData.tenant_unique_id);
     if (existingUser) {
       throw new Error('Tenant unique ID already exists');
     }
-    
+
     // Calculate age if date_of_birth is provided
-    const age = restData.date_of_birth 
-      ? Math.floor((new Date().getTime() - new Date(restData.date_of_birth).getTime()) / (365.25 * 24 * 60 * 60 * 1000))
+    const age = restData.date_of_birth
+      ? Math.floor(
+          (new Date().getTime() - new Date(restData.date_of_birth).getTime()) /
+            (365.25 * 24 * 60 * 60 * 1000)
+        )
       : null;
-    
+
     return await prisma.user.create({
       data: {
         email: restData.email,
@@ -73,7 +71,10 @@ export class UserModel {
       updateData.dateOfBirth = userData.date_of_birth ? new Date(userData.date_of_birth) : null;
       // Update age when date_of_birth changes
       if (userData.date_of_birth) {
-        const age = Math.floor((new Date().getTime() - new Date(userData.date_of_birth).getTime()) / (365.25 * 24 * 60 * 60 * 1000));
+        const age = Math.floor(
+          (new Date().getTime() - new Date(userData.date_of_birth).getTime()) /
+            (365.25 * 24 * 60 * 60 * 1000)
+        );
         updateData.age = age;
       } else {
         updateData.age = null;
@@ -192,13 +193,13 @@ export class UserModel {
 
     // Build orderBy
     const orderBy: Prisma.UserOrderByWithRelationInput = {};
-    
+
     // Map API field names to Prisma field names
     const fieldMapping: Record<string, string> = {
-      'first_name': 'firstName',
-      'last_name': 'lastName',
-      'created_at': 'createdAt',
-      'updated_at': 'updatedAt',
+      first_name: 'firstName',
+      last_name: 'lastName',
+      created_at: 'createdAt',
+      updated_at: 'updatedAt',
     };
 
     const prismaField = fieldMapping[sort_by] || sort_by;
@@ -232,7 +233,7 @@ export class UserModel {
 
   async emailExists(email: string, excludeId?: number): Promise<boolean> {
     const where: Prisma.UserWhereInput = { email };
-    
+
     if (excludeId) {
       where.id = { not: excludeId };
     }

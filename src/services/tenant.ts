@@ -82,7 +82,10 @@ export class TenantService {
     }
   }
 
-  async getAllTenants(params: TenantQueryParams, userRole: UserRole): Promise<PaginatedResponse<Tenant>> {
+  async getAllTenants(
+    params: TenantQueryParams,
+    userRole: UserRole
+  ): Promise<PaginatedResponse<Tenant>> {
     // Admin users can see all tenants, regular users only see active ones
     const includeInactive = userRole === 'admin';
     const result = await this.tenantModel.findAll(params, includeInactive);

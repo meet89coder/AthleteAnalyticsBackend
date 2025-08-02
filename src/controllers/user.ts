@@ -19,7 +19,7 @@ export class UserController {
 
   createUser = asyncHandler(async (req: Request, res: Response): Promise<void> => {
     const userData: CreateUserRequest = req.body;
-    
+
     const user = await this.userService.createUser(userData);
 
     const response: ApiResponse = {
@@ -33,7 +33,7 @@ export class UserController {
 
   getUserById = asyncHandler(async (req: Request, res: Response): Promise<void> => {
     const id = parseInt(req.params.id!, 10);
-    
+
     const user = await this.userService.getUserById(id);
 
     const response: ApiResponse = {
@@ -46,7 +46,7 @@ export class UserController {
 
   getUserByTenantUniqueId = asyncHandler(async (req: Request, res: Response): Promise<void> => {
     const tenantUniqueId = req.params.tenant_unique_id!;
-    
+
     const user = await this.userService.getUserByTenantUniqueId(tenantUniqueId);
 
     const response: ApiResponse = {
@@ -83,7 +83,7 @@ export class UserController {
   updateUser = asyncHandler(async (req: Request, res: Response): Promise<void> => {
     const id = parseInt(req.params.id!, 10);
     const userData: UpdateUserRequest = req.body;
-    
+
     const user = await this.userService.updateUser(id, userData);
 
     const response: ApiResponse = {
@@ -98,7 +98,7 @@ export class UserController {
   updateUserRole = asyncHandler(async (req: Request, res: Response): Promise<void> => {
     const id = parseInt(req.params.id!, 10);
     const { role }: UpdateUserRoleRequest = req.body;
-    
+
     await this.userService.updateUserRole(id, role);
 
     const response: ApiResponse = {
@@ -113,7 +113,7 @@ export class UserController {
   changePassword = asyncHandler(async (req: Request, res: Response): Promise<void> => {
     const id = parseInt(req.params.id!, 10);
     const { current_password, new_password }: ChangePasswordRequest = req.body;
-    
+
     const reqUser = (req as any).user;
     if (!reqUser) {
       res.status(401).json({
@@ -144,7 +144,7 @@ export class UserController {
 
   deleteUser = asyncHandler(async (req: Request, res: Response): Promise<void> => {
     const id = parseInt(req.params.id!, 10);
-    
+
     await this.userService.deleteUser(id);
 
     const response: ApiResponse = {

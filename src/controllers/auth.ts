@@ -13,7 +13,7 @@ export class AuthController {
 
   login = asyncHandler(async (req: Request, res: Response): Promise<void> => {
     const loginData: LoginRequest = req.body;
-    
+
     const result = await this.authService.login(loginData);
 
     const response: ApiResponse = {

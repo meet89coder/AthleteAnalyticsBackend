@@ -3,11 +3,7 @@ import { verifyToken } from '@/utils/jwt';
 import { UserRole } from '@/types/user';
 import { ApiResponse } from '@/types/api';
 
-export const authenticate = (
-  req: Request,
-  res: Response,
-  next: NextFunction
-): void => {
+export const authenticate = (req: Request, res: Response, next: NextFunction): void => {
   try {
     const authHeader = req.headers.authorization;
 

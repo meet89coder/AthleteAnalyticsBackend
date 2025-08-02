@@ -8,12 +8,12 @@ const PORT = config.PORT || 3000;
 // Graceful shutdown handler
 const gracefulShutdown = async (signal: string): Promise<void> => {
   logger.info(`Received ${signal}. Starting graceful shutdown...`);
-  
+
   try {
     // Close database connections
     await prismaService.disconnect();
     logger.info('Database connections closed');
-    
+
     // Exit process
     process.exit(0);
   } catch (error) {
@@ -44,13 +44,13 @@ const startServer = async (): Promise<void> => {
     // Test database connection
     await prismaService.connect();
     await prismaService.testConnection();
-    
+
     // Start HTTP server
     const server = app.listen(PORT, () => {
       logger.info(`Server running on port ${PORT}`);
       logger.info(`Environment: ${config.NODE_ENV}`);
       logger.info(`API Version: ${config.API_VERSION}`);
-      
+
       if (config.ENABLE_SWAGGER && config.NODE_ENV !== 'production') {
         logger.info(`Swagger documentation available at: http://localhost:${PORT}/api-docs`);
       }
@@ -78,7 +78,6 @@ const startServer = async (): Promise<void> => {
           throw error;
       }
     });
-
   } catch (error) {
     logger.error('Failed to start server:', error);
     process.exit(1);

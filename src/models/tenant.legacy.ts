@@ -24,7 +24,7 @@ export class TenantModel {
     `;
 
     const result: QueryResult = await this.db.query(query, [id]);
-    
+
     if (result.rows.length === 0) {
       return null;
     }
@@ -81,7 +81,7 @@ export class TenantModel {
     `;
 
     const result: QueryResult = await this.db.query(query, values);
-    
+
     if (result.rows.length === 0) {
       return null;
     }
@@ -101,7 +101,10 @@ export class TenantModel {
     return result.rowCount !== null && result.rowCount > 0;
   }
 
-  async findAll(params: TenantQueryParams, includeInactive = false): Promise<PaginatedResponse<Tenant>> {
+  async findAll(
+    params: TenantQueryParams,
+    includeInactive = false
+  ): Promise<PaginatedResponse<Tenant>> {
     const {
       page = 1,
       limit = 20,

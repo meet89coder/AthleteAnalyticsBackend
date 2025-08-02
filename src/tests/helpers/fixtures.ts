@@ -38,13 +38,7 @@ export const userFixtures = {
     phone: '+9876543210',
   },
 
-  invalidEmails: [
-    'invalid-email',
-    '@invalid.com',
-    'user@',
-    'user@.com',
-    '',
-  ],
+  invalidEmails: ['invalid-email', '@invalid.com', 'user@', 'user@.com', ''],
 
   invalidPasswords: [
     'short',

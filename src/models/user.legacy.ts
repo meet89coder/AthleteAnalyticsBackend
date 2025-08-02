@@ -32,7 +32,7 @@ export class UserModel {
     `;
 
     const result: QueryResult = await this.db.query(query, [id]);
-    
+
     if (result.rows.length === 0) {
       return null;
     }
@@ -55,7 +55,7 @@ export class UserModel {
     `;
 
     const result: QueryResult = await this.db.query(query, [email]);
-    
+
     if (result.rows.length === 0) {
       return null;
     }
@@ -78,7 +78,7 @@ export class UserModel {
     `;
 
     const result: QueryResult = await this.db.query(query, [uniqueId]);
-    
+
     if (result.rows.length === 0) {
       return null;
     }
@@ -155,7 +155,7 @@ export class UserModel {
     `;
 
     const result: QueryResult = await this.db.query(query, values);
-    
+
     if (result.rows.length === 0) {
       return null;
     }

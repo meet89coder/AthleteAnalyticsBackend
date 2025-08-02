@@ -17,7 +17,7 @@ interface DatabaseConfig {
 
 const getDatabaseConfig = (): DatabaseConfig => {
   const requiredEnvVars = ['DB_HOST', 'DB_PORT', 'DB_NAME', 'DB_USER', 'DB_PASSWORD'];
-  
+
   for (const envVar of requiredEnvVars) {
     if (!process.env[envVar]) {
       throw new Error(`Missing required environment variable: ${envVar}`);
@@ -65,7 +65,7 @@ export const closeConnection = async (): Promise<void> => {
 };
 
 // Handle pool errors
-pool.on('error', (err) => {
+pool.on('error', err => {
   logger.error('Unexpected error on idle client', err);
   process.exit(-1);
 });

@@ -7,7 +7,7 @@ async function main() {
   console.log('🌱 Starting seed...');
 
   // Create admin user
-  const adminPasswordHash = await bcrypt.hash('admin123', 12);
+  const adminPasswordHash = await bcrypt.hash('Admin@1234', 12);
   
   const adminUser = await prisma.user.upsert({
     where: { email: 'admin@athleteanalytics.com' },

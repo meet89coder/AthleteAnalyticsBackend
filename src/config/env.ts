@@ -6,7 +6,7 @@ dotenv.config();
 const envSchema = Joi.object({
   NODE_ENV: Joi.string().valid('development', 'production', 'test').default('development'),
   PORT: Joi.number().default(3000),
-  
+
   // Database
   DB_HOST: Joi.string().required(),
   DB_PORT: Joi.number().default(5432),
@@ -14,28 +14,28 @@ const envSchema = Joi.object({
   DB_USER: Joi.string().required(),
   DB_PASSWORD: Joi.string().required(),
   DATABASE_URL: Joi.string().optional(),
-  
+
   // JWT
   JWT_SECRET: Joi.string().min(32).required(),
   JWT_EXPIRES_IN: Joi.string().default('24h'),
-  
+
   // Security
   BCRYPT_ROUNDS: Joi.number().min(10).max(15).default(12),
-  
+
   // Rate Limiting
   RATE_LIMIT_WINDOW_MS: Joi.number().default(60000),
   RATE_LIMIT_MAX: Joi.number().default(100),
   AUTH_RATE_LIMIT_MAX: Joi.number().default(5),
   ADMIN_RATE_LIMIT_MAX: Joi.number().default(200),
-  
+
   // Logging
   LOG_LEVEL: Joi.string().valid('error', 'warn', 'info', 'debug').default('info'),
   LOG_FILE: Joi.string().optional(),
-  
+
   // API
   API_VERSION: Joi.string().default('v1'),
   API_PREFIX: Joi.string().default('/api'),
-  
+
   // Swagger
   ENABLE_SWAGGER: Joi.boolean().default(true),
 }).unknown();
