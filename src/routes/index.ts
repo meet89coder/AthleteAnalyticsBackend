@@ -2,6 +2,8 @@ import { Router } from 'express';
 import userRoutes from './user';
 import authRoutes from './auth';
 import tenantRoutes from './tenant';
+import teamRoutes from './team';
+import analyticsRoutes from './analytics';
 import { config } from '@/config/env';
 
 const router = Router();
@@ -10,6 +12,8 @@ const router = Router();
 router.use('/auth', authRoutes);
 router.use('/users', userRoutes);
 router.use('/tenants', tenantRoutes);
+router.use('/teams', teamRoutes);
+router.use('/analytics', analyticsRoutes);
 
 /**
  * @swagger
